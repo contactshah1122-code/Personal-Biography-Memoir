@@ -1,198 +1,153 @@
 # Digital Life Archive — Personal Biography & Living Memoir
 
-A premium, production-ready Digital Life Archive and interactive autobiography web application built with **Python 3**, **Flask**, **Jinja2**, **SQLAlchemy**, and clean vanilla frontend architecture.
+A premium, production-ready Digital Life Archive and interactive autobiography web application designed as a living digital book of one person's life—documenting origins, childhood, family lineage, education, sensory memories, pivotal trials, career craft, personal growth, and long-term future horizons.
 
-Designed like an interactive digital book of one person's life—documenting origins, childhood, family lineage, education, sensory memories, pivotal trials, career craft, personal growth, and long-term future horizons.
+Engineered to be **100% self-contained and statically deployable to Cloudflare Pages & Cloudflare Workers** with zero backend or database hosting dependencies required for the demo, while maintaining clean architecture for future full-stack extensions.
 
 ---
 
-## 1. Project Architecture & Directory Layout
+## 1. Cloudflare Pages & Workers Deployment
+
+### Quick Deploy to Cloudflare Pages
+1. Connect your GitHub repository to **Cloudflare Pages**.
+2. Set the build settings:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Build Output Directory**: `dist`
+   - **Root Directory**: `/`
+3. Click **Save and Deploy**.
+4. The site will be live instantly across Cloudflare's global edge network.
+
+### Cloudflare Assets & SPA Routing
+- **Output Directory**: `dist/`
+- **SPA Redirection**: `public/_redirects` maps `/* -> /index.html 200` automatically.
+- **Static Assets**: All photographs and images are served directly from `/images/*` in `dist/images/`.
+- **Search Engine Optimization**: `robots.txt` and `sitemap.xml` are packaged into the root of `dist/`.
+
+---
+
+## 2. Architecture & Directory Layout
 
 ```
 digital-life-archive/
 │
-├── app.py                      # Core Flask WSGI application & route controllers
-├── config.py                   # Environment-driven configuration (SQLite/PostgreSQL)
-├── seed_data.py                # Initial database seeder with clearly marked demo placeholders
-├── requirements.txt            # Python production dependencies
-├── Procfile                    # Production process definition (gunicorn app:app)
-├── .env.example                # Template for environment variables
-├── README.md                   # Complete architectural and deployment manual
+├── dist/                       # Production build output for Cloudflare Pages/Workers
+│   ├── index.html              # Core single-page entry point with full metadata
+│   ├── assets/                 # Bundled CSS and JavaScript chunks
+│   ├── images/                 # Optimized photographic plates
+│   ├── _redirects              # Cloudflare SPA route handler
+│   ├── robots.txt              # Search engine crawling rules
+│   └── sitemap.xml             # XML sitemap
 │
-├── instance/
-│   └── database.db             # Local SQLite database (auto-created on first run)
+├── public/                     # Static assets copied into dist during build
+│   ├── images/                 # Archival photographic plates
+│   ├── _redirects              # Cloudflare routing rule
+│   ├── robots.txt              # Static robots.txt
+│   └── sitemap.xml             # Static sitemap.xml
 │
-├── models/
-│   ├── __init__.py             # Model exports
-│   └── models.py               # SQLAlchemy models (Profile, Family, Timeline, etc.)
+├── src/
+│   ├── App.tsx                 # Core application controller with all 13 interactive sections
+│   ├── main.tsx                # React entry point
+│   ├── index.css               # Editorial design system (Archival Warm Paper, zero-pill)
+│   └── data/
+│       └── archiveData.ts      # Structured archive records with client demo placeholders
 │
-├── templates/
-│   ├── base.html               # Master layout with 3-zone header, mobile drawer, colophon
-│   ├── index.html              # Cinematic frontispiece hero & horizon milestones
-│   ├── story.html              # Long-form 10-chapter autobiographical monograph
-│   ├── childhood.html          # Village origins, formative lessons, early interests
-│   ├── family.html             # Living lineage archive & family member profiles
-│   ├── education.html          # Academic progression (Primary → Specialization)
-│   ├── timeline.html           # Interactive hybrid timeline with category filters
-│   ├── gallery.html            # Photographic plate archive with modal lightbox
-│   ├── memories.html           # Evocative memoir vignettes with pull quotes
-│   ├── achievements.html       # Academic, competition, and professional milestones
-│   ├── professional.html       # Vocational craft, systems architecture, skills
-│   ├── growth.html             # Philosophical reflections (Who I Was / Am / Going)
-│   ├── future.html             # Horizon goals across career, philanthropy, and family
-│   ├── contact.html            # Transmission portal & guestbook saving to database
-│   ├── 404.html                # Custom archival missing-folio error page
-│   └── 500.html                # Custom server interruption error page
-│
-└── static/
-    ├── css/
-    │   └── style.css           # Curatorial design system (archival warm paper, zero-pill)
-    ├── js/
-    │   └── main.js             # Pure vanilla JS (lightbox, theme toggle, ambient audio)
-    ├── images/                 # Archival photographic plates
-    └── uploads/                # Directory for client photograph uploads
+├── index.html                  # HTML entry point with preconnect Google Fonts & OpenGraph
+├── package.json                # Dependencies and build scripts
+├── tsconfig.json               # TypeScript strict configuration
+├── vite.config.ts              # Vite configuration
+└── README.md                   # This manual
 ```
 
 ---
 
-## 2. Technology Stack
+## 3. Implemented Chapters & Interactive Features
 
-### Backend
-- **Python 3.10+**
-- **Flask 3.x**: Lightweight, un-opinionated WSGI micro-framework
-- **Jinja2**: Server-side template rendering with modular layouts
-- **SQLAlchemy 2.x & Flask-SQLAlchemy**: Object-relational mapping supporting both SQLite and PostgreSQL
-- **python-dotenv**: Multi-environment variable management
-- **Gunicorn**: Production WSGI HTTP server
+1. **Frontispiece (Home)**:
+   - Real profile photo placeholder with chapter caption
+   - Editorial typography and curatorial quote
+   - Sequential Life Horizons visual roadmap (*Childhood → Education → Challenges → Growth → Present → Future*)
+   - Quick excerpt anchors into featured timeline events, memories, and photos
 
-### Frontend
-- **HTML5**: Accessible, semantic typography with WCAG AA compliance
-- **CSS3**: Custom archival design tokens (`Playfair Display`, `Lora`, `Plus Jakarta Sans`, `JetBrains Mono`)
-- **Vanilla JavaScript**: Zero heavy framework dependencies, native Web Audio ambient generator, modal lightbox with keyboard controls
+2. **My Story**:
+   - 10-chapter long-form autobiographical monograph
+   - Editorial drop caps, reading time indicator, and chapter anchor rail
 
----
+3. **Childhood & Origins**:
+   - Village homestead archival plate
+   - Early interests, important places, family environment, and lessons learned
 
-## 3. Database Models
+4. **Family & Lineage**:
+   - Profiles of parents, grandparents, and siblings with photo placeholders
+   - Cherished memories and generational tenets
 
-The database schema is structured around 11 core models:
+5. **Education Journey**:
+   - Sequential academic stages from Primary School to Advanced Mastery
+   - Institution details, field of focus, intellectual reflection, and distinctions
 
-| Model | Purpose | Key Attributes |
-|---|---|---|
-| `Profile` | Core identity & biography | `full_name`, `birth_place`, `current_chapter`, `hero_quote`, `short_bio` |
-| `FamilyMember` | Lineage & family records | `name`, `relationship`, `short_bio`, `important_memories`, `photo_url` |
-| `Education` | Academic credentials | `stage_name`, `institution`, `years`, `field_of_study`, `experience` |
-| `TimelineEvent` | Chronological life events | `year_date`, `title`, `category`, `description`, `location`, `is_featured` |
-| `Memory` | Sensory memoirs | `title`, `date_str`, `location`, `story`, `quote`, `photo_url` |
-| `Achievement` | Verified honors & awards | `title`, `year`, `category`, `issuer`, `description`, `image_url` |
-| `ProfessionalExperience` | Career trajectory | `role`, `organization`, `years`, `narrative_description`, `key_learnings` |
-| `Skill` | Acquired disciplines | `name`, `category`, `proficiency_note`, `reflection` |
-| `GalleryImage` | Archival photographic plates | `title`, `caption`, `category`, `image_url`, `year` |
-| `FutureGoal` | Horizon aspirations | `title`, `category`, `target_timeline`, `description`, `why_it_matters` |
-| `ContactMessage` | Visitor transmissions | `sender_name`, `sender_email`, `subject`, `message`, `created_at` |
+6. **Life Timeline**:
+   - Interactive category filtering (*All, Childhood, Education, Family, Achievement, Challenge, Career, Growth, Present*)
+   - Alternating desktop spine and responsive single-column mobile view
 
----
+7. **Photo Archive & Gallery**:
+   - Responsive plate grid with category filtering
+   - Fullscreen modal lightbox with keyboard navigation (`ArrowLeft`, `ArrowRight`, `Escape`)
+   - Captions, year stamps, and accession counters
 
-## 4. Local Development Instructions
+8. **Memories & Inward Reflections**:
+   - Evocative memoir vignettes with pull quotes and sensory settings
 
-### Step 1: Clone the repository
-```bash
-git clone <repository_url>
-cd digital-life-archive
-```
+9. **Achievements, Honors & Milestones**:
+   - Academic, competition, professional, and personal endurance records
 
-### Step 2: Create and activate a virtual environment
-```bash
-# On Linux / macOS:
-python3 -m venv venv
-source venv/bin/activate
+10. **Professional Journey & Craft**:
+    - Guiding craft doctrine: durability over novelty
+    - Epochs of vocational practice and synthesized knowledge capabilities
 
-# On Windows:
-python -m venv venv
-venv\Scripts\activate
-```
+11. **Personal Growth**:
+    - Philosophical reflections: *Who I Was, Who I Am, What I Learned, How I Changed, Where I Am Going*
 
-### Step 3: Install dependencies
-```bash
-pip install -r requirements.txt
-```
+12. **Future Goals & Horizons**:
+    - Multi-decadal aspirations across creative authorship, scholarship endowment, and homestead stewardship
 
-### Step 4: Configure environment variables
-```bash
-cp .env.example .env
-```
-Edit `.env` to configure your `SECRET_KEY` and optional `DATABASE_URL`.
+13. **Contact & Archival Transmissions**:
+    - Self-contained working form with client-side validation
+    - Saves transmissions into browser storage with instant success alert
+    - Displays locally preserved transmissions list for testing and verification
 
-### Step 5: Run the application locally
-```bash
-python app.py
-```
-Open your browser and navigate to:
-```
-http://localhost:5001
-```
-The database will automatically initialize `instance/database.db` and seed the initial placeholder records.
+14. **Curatorial Controls**:
+    - **Reading Room Toggle**: Switch between Parchment and Dark Reading Room modes (persisted in `localStorage`)
+    - **Atmospheric Room Tone**: Synthesizes a subtle 110Hz/165Hz room tone using the native Web Audio API (zero external audio files)
+    - **Reading Progress Bar**: Dynamic scroll progress line at top of viewport
 
 ---
 
-## 5. Production Deployment Instructions
+## 4. Local Development
 
-### Running with Gunicorn (Local or VPS)
 ```bash
-gunicorn app:app --workers 4 --bind 0.0.0.0:5000
-```
+# 1. Install dependencies
+npm install
 
-### Deployment to Render / Heroku / Railway
-1. Push the repository to GitHub.
-2. In your hosting platform:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-   - Set environment variables:
-     - `SECRET_KEY`: A secure random 64-character secret
-     - `DATABASE_URL`: Your PostgreSQL connection string (e.g. `postgresql://user:pass@host:5432/dbname`)
-3. The application will automatically detect PostgreSQL via `config.py` and run migrations upon startup.
+# 2. Start the local Vite development server
+npm run dev
 
----
+# 3. Build for production (Cloudflare output in dist/)
+npm run build
 
-## 6. How to Replace Placeholder Content with Real Facts
-
-All demo entries are clearly flagged with square brackets, for example:
-- `[REAL FULL NAME]`
-- `[HOMETOWN / ANCESTRAL VILLAGE]`
-- `[CHILDHOOD STORY]`
-- `[REAL EDUCATION DETAILS]`
-- `[REAL FAMILY INFORMATION]`
-
-### Method 1: Modify `seed_data.py`
-Before initial deployment, open `seed_data.py` and edit the values directly. Delete `instance/database.db` and run `python app.py` to re-seed.
-
-### Method 2: Future Admin Panel Integration
-The architecture is prepared for a `/admin` blueprint. Because all content is stored in SQLAlchemy models rather than hard-coded templates, you can easily mount Flask-Admin or custom CRUD routes to update records live.
-
----
-
-## 7. Health & Deployment Verification
-
-To test that your deployed instance is operational, ping the health endpoint:
-```bash
-curl https://your-domain.com/health
-```
-
-Expected JSON response:
-```json
-{
-  "status": "ok",
-  "app": "Digital Life Archive",
-  "database": "connected",
-  "data": {
-    "profiles": 1,
-    "timeline_events": 8,
-    "engine": "sqlite"
-  },
-  "timestamp": "2026-09-26T22:30:00Z"
-}
+# 4. Preview the production build locally
+npm run preview
 ```
 
 ---
 
-## 8. License & Custodianship
-Preserved under the Personal Digital Heritage Trust. Designed for multi-generational longevity.
+## 5. Deployment Verification Checklist
+
+- [x] `npm install` runs cleanly without missing packages
+- [x] `npm run build` generates `dist/` with `index.html`, `assets/`, `images/`, `_redirects`
+- [x] Zero external backend or Python server requirement for Cloudflare deployment
+- [x] All 13 navigation buttons functional on desktop and mobile drawer
+- [x] Interactive lightbox opens, navigates with arrow keys, and closes cleanly
+- [x] Timeline filters events dynamically
+- [x] Contact form submits and saves transmission with visual success feedback
+- [x] No console errors or broken asset references
+- [x] Fully responsive across viewports from 360px to 1440px+
