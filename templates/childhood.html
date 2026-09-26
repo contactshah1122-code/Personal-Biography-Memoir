@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Childhood & Origins — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <!-- Section Header -->
+    <header style="max-width: 760px; margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chronicle Part I · Origins & Roots</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        The Village Years: Childhood & Memory
+      </h1>
+      <p class="editorial-subhead">
+        Formative impressions in {{ profile.birth_place }}, where stone walls, unhurried seasons, and familial wisdom shaped the earliest worldview.
+      </p>
+      <div class="metadata-line" style="margin-top: 1rem;">
+        <span>Birth Place: {{ profile.birth_place }}</span>
+        <span class="meta-separator">/</span>
+        <span>Era: Childhood & Formative Decades</span>
+        <span class="meta-separator">/</span>
+        <span>Atmosphere: Agrarian Simplicity & Boundless Curiosity</span>
+      </div>
+    </header>
+
+    <!-- Large Archival Photography Spotlight -->
+    <div style="margin-bottom: 4rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden; background-color: var(--bg-surface);">
+      <div style="max-height: 480px; overflow: hidden;">
+        <img 
+          src="{{ url_for('static', filename='images/village_home.jpg') }}" 
+          alt="Childhood Village Home and Heritage" 
+          style="width: 100%; height: 100%; object-fit: cover; display: block;"
+          loading="eager"
+        >
+      </div>
+      <div style="padding: 1.25rem 1.5rem; background-color: var(--bg-surface); display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; border-top: 1px solid var(--border-subtle);">
+        <div>
+          <h4 style="font-family: var(--font-serif-display); font-size: 1rem; color: var(--text-ink);">[ANCESTRAL VILLAGE COURTYARD]</h4>
+          <p style="font-size: 0.8125rem; color: var(--text-muted);">[EARLY MEMORY PLACE: The threshold where generations gathered to shell peas, share folktales, and watch summer storms rolling over the hills.]</p>
+        </div>
+        <span class="tabular-nums" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-terracotta);">Archival Plate 01</span>
+      </div>
+    </div>
+
+    <!-- Core Grid: Memories, Early Interests, Important Places & Lessons -->
+    <div class="archive-grid-2" style="margin-bottom: 4rem;">
+      <!-- Card 1: Early Interests -->
+      <div class="archive-card">
+        <span class="section-kicker">Awakening</span>
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--text-ink);">
+          Early Interests & Hands-on Curiosity
+        </h3>
+        <p style="font-size: 0.9375rem; line-height: 1.7; color: var(--text-prose); margin-bottom: 1rem;">
+          [EARLY INTERESTS: Before microprocessors and internet tutorials, technical wonder was mechanical. Disassembling grandfather's wind-up clocks, examining bicycle gear sprockets, sketching wildlife from the orchard, and reading astronomy pamphlets by candle-light.]
+        </p>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+          Everything around us was tangible: dirt, timber, water, and mechanics. Learning meant physically experimenting and observing cause and effect without algorithmic filters.
+        </p>
+      </div>
+
+      <!-- Card 2: Important Places -->
+      <div class="archive-card">
+        <span class="section-kicker">Topography</span>
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--text-ink);">
+          Important Places of Remembrance
+        </h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem;">
+          <li style="border-bottom: 1px solid var(--border-hairline); padding-bottom: 0.5rem;">
+            <strong>[THE BANYAN TREE COURTYARD]</strong> — Village meeting spot where elders settled community disputes and children played marble games.
+          </li>
+          <li style="border-bottom: 1px solid var(--border-hairline); padding-bottom: 0.5rem;">
+            <strong>[THE RIVER CROSSING & STONE BRIDGE]</strong> — Daily threshold crossed to walk to primary school; place of summer swimming and reflection.
+          </li>
+          <li style="border-bottom: 1px solid var(--border-hairline); padding-bottom: 0.5rem;">
+            <strong>[THE TOWN READING ROOM]</strong> — A single-room public library containing yellowed encyclopedias and classical literature.
+          </li>
+          <li>
+            <strong>[THE FAMILY ATTIC]</strong> — Quiet wooden sanctuary containing family trunks, vintage tools, and old correspondence.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Family Environment -->
+      <div class="archive-card">
+        <span class="section-kicker">Foundations</span>
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--text-ink);">
+          The Family Environment
+        </h3>
+        <p style="font-size: 0.9375rem; line-height: 1.7; color: var(--text-prose); margin-bottom: 1rem;">
+          [FAMILY ENVIRONMENT: Raised in an extended family setting where mutual responsibility preceded personal whim. Meals were shared from a common vessel, and evening hours were spent in conversation rather than isolated media consumption.]
+        </p>
+        <blockquote class="editorial-quote" style="margin: 1rem 0; font-size: 1.05rem;">
+          “Respect for labor is the first step toward genuine wisdom.”
+        </blockquote>
+      </div>
+
+      <!-- Card 4: Lessons Learned -->
+      <div class="archive-card">
+        <span class="section-kicker">Enduring Wisdom</span>
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--text-ink);">
+          Formative Lessons of Childhood
+        </h3>
+        <p style="font-size: 0.9375rem; line-height: 1.7; color: var(--text-prose); margin-bottom: 1rem;">
+          [LESSONS LEARNED: 1. Patience is not passive waiting; it is working steadily while things take their natural time to ripen. 2. A promise given to a neighbor is more binding than any written legal contract. 3. Books are the ultimate equalizers across geographies.]
+        </p>
+        <div style="margin-top: auto;">
+          <a href="{{ url_for('family') }}" class="btn-secondary" style="font-size: 0.8125rem;">
+            Explore Family Lineage &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Childhood Memories Story Blocks -->
+    <div style="margin-top: 3rem;">
+      <span class="section-kicker">Narrative Plates</span>
+      <h2 class="editorial-title" style="font-size: 1.85rem; margin-bottom: 2rem;">
+        Recorded Childhood Vignettes
+      </h2>
+
+      <div class="archive-grid-2">
+        {% for mem in memories %}
+        <div class="archive-card" style="background-color: var(--bg-surface-elevated);">
+          <div class="metadata-line" style="margin-bottom: 0.5rem;">
+            <span>{{ mem.date_str }}</span>
+            <span class="meta-separator">·</span>
+            <span>{{ mem.location }}</span>
+          </div>
+          <h3 style="font-family: var(--font-serif-display); font-size: 1.2rem; color: var(--text-ink); margin-bottom: 0.75rem;">
+            {{ mem.title }}
+          </h3>
+          <p style="font-size: 0.9375rem; line-height: 1.7; color: var(--text-prose);">
+            {{ mem.story }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

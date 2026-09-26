@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Education Journey — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <!-- Header -->
+    <header style="max-width: 760px; margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chronicle Part III · The Intellectual Ascent</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        The Education Journey
+      </h1>
+      <p class="editorial-subhead">
+        A chronological progression through academic institutions, libraries, and laboratories that transformed innate curiosity into disciplined mastery.
+      </p>
+      <div class="metadata-line" style="margin-top: 1rem;">
+        <span>Path: Primary Foundations &rarr; Higher Academia &rarr; Advanced Specialization</span>
+        <span class="meta-separator">/</span>
+        <span>Format: Structured Academic Record</span>
+      </div>
+    </header>
+
+    <!-- Visual Journey Flow Diagram / Progress Indicator -->
+    <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 3.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; overflow-x: auto; gap: 1rem;">
+        {% for stage in stages %}
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background-color: var(--accent-terracotta-soft); color: var(--accent-terracotta); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;">
+            0{{ loop.index }}
+          </div>
+          <div>
+            <div style="font-family: var(--font-sans-ui); font-size: 0.8125rem; font-weight: 600; color: var(--text-ink); white-space: nowrap;">{{ stage.stage_name }}</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono);">{{ stage.years }}</div>
+          </div>
+        </div>
+        {% if not loop.last %}
+        <div style="color: var(--border-subtle); font-size: 1.25rem;">&rarr;</div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Education Stages Detailed List -->
+    <div style="display: flex; flex-direction: column; gap: 3rem;">
+      {% for stage in stages %}
+      <div class="archive-card" style="padding: 2.25rem;">
+        <div class="archive-grid-2" style="align-items: center; gap: 2.5rem;">
+          <!-- Information Column -->
+          <div>
+            <div class="metadata-line" style="margin-bottom: 0.5rem;">
+              <span style="font-family: var(--font-mono); color: var(--accent-terracotta);">{{ stage.years }}</span>
+              <span class="meta-separator">·</span>
+              <span>{{ stage.location }}</span>
+              <span class="meta-separator">·</span>
+              <span style="text-transform: uppercase;">{{ stage.stage_name }}</span>
+            </div>
+
+            <h2 style="font-family: var(--font-serif-display); font-size: 1.6rem; color: var(--text-ink); margin-bottom: 0.5rem;">
+              {{ stage.institution }}
+            </h2>
+
+            <div style="font-family: var(--font-sans-ui); font-size: 0.875rem; font-weight: 600; color: var(--accent-bronze); margin-bottom: 1.25rem;">
+              Field of Focus: {{ stage.field_of_study }}
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <span style="font-family: var(--font-sans-ui); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">
+                Intellectual Experience & Reflection
+              </span>
+              <p style="font-size: 0.95rem; line-height: 1.75; color: var(--text-prose);">
+                {{ stage.experience }}
+              </p>
+            </div>
+
+            {% if stage.achievements %}
+            <div style="background-color: var(--bg-surface-elevated); padding: 1rem 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <span style="font-family: var(--font-sans-ui); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-terracotta); display: block; margin-bottom: 0.25rem;">
+                Honors & Academic Distinctions
+              </span>
+              <p style="font-size: 0.875rem; color: var(--text-ink);">
+                {{ stage.achievements }}
+              </p>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Archival Visual Plate Column -->
+          <div>
+            <div style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle); background-color: var(--bg-surface-elevated); aspect-ratio: 4/3;">
+              <img src="{{ stage.photo_url or url_for('static', filename='images/study_desk.jpg') }}" alt="{{ stage.institution }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+            </div>
+            <div style="font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">
+              Archival Plate: {{ stage.stage_name }} Reference
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

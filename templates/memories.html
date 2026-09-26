@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Memories & Reflections — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container archive-container-narrow">
+    <!-- Header -->
+    <header style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chronicle Part IV · Emotional Cartography</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        Memories & Inward Reflections
+      </h1>
+      <p class="editorial-subhead">
+        Sensory recollections of specific mornings, crossroads, night watches, and conversations that permanently altered the internal compass.
+      </p>
+      <div class="metadata-line" style="margin-top: 1rem;">
+        <span>Format: Literary Memoir Plates</span>
+        <span class="meta-separator">/</span>
+        <span>Atmosphere: Unflinching Honesty & Emotional Clarity</span>
+      </div>
+      <hr class="hairline-divider">
+    </header>
+
+    <!-- Memories Stream -->
+    <div style="display: flex; flex-direction: column; gap: 4rem;">
+      {% for mem in memories %}
+      <article class="archive-card" style="padding: 2.5rem; background-color: var(--bg-surface);">
+        <div class="metadata-line" style="margin-bottom: 0.75rem;">
+          <span style="font-family: var(--font-mono); color: var(--accent-terracotta);">{{ mem.date_str }}</span>
+          {% if mem.location %}
+          <span class="meta-separator">·</span>
+          <span>{{ mem.location }}</span>
+          {% endif %}
+          <span class="meta-separator">·</span>
+          <span>Memoir Folio #0{{ loop.index }}</span>
+        </div>
+
+        <h2 style="font-family: var(--font-serif-display); font-size: 1.6rem; color: var(--text-ink); margin-bottom: 1.25rem;">
+          {{ mem.title }}
+        </h2>
+
+        {% if mem.photo_url %}
+        <div style="margin-bottom: 1.5rem; border-radius: var(--radius-sm); overflow: hidden; max-height: 380px; border: 1px solid var(--border-subtle);">
+          <img src="{{ mem.photo_url }}" alt="{{ mem.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+        </div>
+        {% endif %}
+
+        <div style="font-size: 1.05rem; line-height: 1.85; color: var(--text-prose); margin-bottom: 1.5rem;">
+          {{ mem.story }}
+        </div>
+
+        {% if mem.quote %}
+        <blockquote class="editorial-quote" style="margin: 1.5rem 0 0.5rem 0;">
+          {{ mem.quote }}
+        </blockquote>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,6 @@
+{
+  "name": "Digital Life Archive - Personal Biography & Memoir",
+  "description": "A premium, production-ready Digital Life Archive and interactive autobiography built with Python Flask and Jinja templates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Future Vision & Goals — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <!-- Header -->
+    <header style="max-width: 760px; margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chronicle Part VIII · The Unwritten Pages</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        Future Vision & Aspirational Goals
+      </h1>
+      <p class="editorial-subhead">
+        A documented pledge of intentionality. These are not idle daydreams, but strategic horizons mapped across career, philanthropy, family legacy, and creative craft.
+      </p>
+      <div class="metadata-line" style="margin-top: 1rem;">
+        <span>Status: Active Multi-Year Horizon</span>
+        <span class="meta-separator">/</span>
+        <span>Registered Aspirations: {{ goals|length }} Goals</span>
+      </div>
+    </header>
+
+    <!-- Inspiring Vision Proclamation -->
+    <div style="background-color: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 2.25rem; margin-bottom: 3.5rem;">
+      <blockquote class="editorial-quote" style="margin: 0; font-size: 1.3rem;">
+        “A goal without a moral foundation is merely ambition; an ambition tethered to service becomes a lasting heritage.”
+        <span class="quote-author">— Custodian's Long-Horizon Compass</span>
+      </blockquote>
+    </div>
+
+    <!-- Future Goals Grid -->
+    <div class="archive-grid-2">
+      {% for goal in goals %}
+      <div class="archive-card" style="padding: 2rem;">
+        <div class="metadata-line" style="margin-bottom: 0.5rem;">
+          <span style="font-weight: 600; color: var(--accent-terracotta);">{{ goal.category }}</span>
+          <span class="meta-separator">·</span>
+          <span style="font-family: var(--font-mono); color: var(--accent-bronze);">{{ goal.target_timeline }}</span>
+          <span class="meta-separator">·</span>
+          <span>{{ goal.status }}</span>
+        </div>
+
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.35rem; color: var(--text-ink); margin-bottom: 0.75rem;">
+          {{ goal.title }}
+        </h3>
+
+        <p style="font-size: 0.9375rem; line-height: 1.7; color: var(--text-prose); margin-bottom: 1.25rem;">
+          {{ goal.description }}
+        </p>
+
+        {% if goal.why_it_matters %}
+        <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-hairline);">
+          <span style="font-family: var(--font-sans-ui); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">
+            Why This Endeavor Matters
+          </span>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-style: italic;">
+            {{ goal.why_it_matters }}
+          </p>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Long-Term 20-Year Horizon Matrix -->
+    <div style="margin-top: 4rem; padding: 2.5rem; background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+      <span class="section-kicker">Multi-Decadal Trajectory</span>
+      <h3 style="font-family: var(--font-serif-display); font-size: 1.5rem; color: var(--text-ink); margin-bottom: 1.5rem;">
+        The Four Pillars of the Unwritten Volume
+      </h3>
+
+      <div class="archive-grid-2" style="gap: 2rem;">
+        <div>
+          <h4 style="font-family: var(--font-sans-ui); font-weight: 700; font-size: 0.95rem; color: var(--accent-terracotta); margin-bottom: 0.4rem;">
+            I. Intellectual Preservation (Books & Archives)
+          </h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65;">
+            Authoring at least two monographs documenting rural transition and digital epistemology, distributed openly under permanent public archiving licenses.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-family: var(--font-sans-ui); font-weight: 700; font-size: 0.95rem; color: var(--accent-terracotta); margin-bottom: 0.4rem;">
+            II. Institutional Generosity (The Scholarship Trust)
+          </h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65;">
+            Ensuring that by year 2030, a self-sustaining educational endowment funds university education for talented village students indefinitely.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-family: var(--font-sans-ui); font-weight: 700; font-size: 0.95rem; color: var(--accent-terracotta); margin-bottom: 0.4rem;">
+            III. Grounded Stewardship (Land & Homestead)
+          </h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65;">
+            Living in intimate communion with soil, cultivating timber, heritage heirloom crops, and maintaining a sanctuary where family may return across generations.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-family: var(--font-sans-ui); font-weight: 700; font-size: 0.95rem; color: var(--accent-terracotta); margin-bottom: 0.4rem;">
+            IV. Spiritual Equanimity (Daily Serenity)
+          </h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65;">
+            Deepening internal quietude, maintaining physical vitality through mountain trekking, and fostering generosity of heart until the final chapter closes.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

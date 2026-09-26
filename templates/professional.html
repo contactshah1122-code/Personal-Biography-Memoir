@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Professional Journey & Craft — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <!-- Header -->
+    <header style="max-width: 760px; margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chronicle Part VI · Vocation & Labor</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        Professional Journey & Acquired Craft
+      </h1>
+      <p class="editorial-subhead">
+        A reflective examination of vocational discipline, engineering stewardship, and practical problem-solving. Written not as a corporate resume, but as an integral chapter of life philosophy.
+      </p>
+    </header>
+
+    <!-- Professional Vocation Philosophy Banner -->
+    <div style="background-color: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 2rem 2.5rem; margin-bottom: 3.5rem;">
+      <span class="section-kicker">Guiding Craft Doctrine</span>
+      <h3 style="font-family: var(--font-serif-display); font-size: 1.35rem; color: var(--text-ink); margin-bottom: 0.75rem;">
+        The Primacy of Durability Over Novelty
+      </h3>
+      <p style="font-size: 0.95rem; line-height: 1.75; color: var(--text-prose); max-width: 800px;">
+        Real craft is not measured by the velocity with which systems are assembled, but by the quiet grace with which they withstand unforeseen shocks. In software engineering as in masonry, true elegance resides in invisible foundations: deterministic boundaries, clear contracts, and human empathy for those who must maintain the system a decade later.
+      </p>
+    </div>
+
+    <!-- Career Trajectory Narrative (Reflective Experience Cards) -->
+    <div style="margin-bottom: 4rem;">
+      <span class="section-kicker">Vocational Chronology</span>
+      <h2 class="editorial-title" style="font-size: 1.85rem; margin-bottom: 2rem;">
+        Epochs of Practice
+      </h2>
+
+      <div style="display: flex; flex-direction: column; gap: 2rem;">
+        {% for exp in experiences %}
+        <div class="archive-card" style="padding: 2.25rem;">
+          <div class="metadata-line" style="margin-bottom: 0.5rem;">
+            <span style="font-family: var(--font-mono); color: var(--accent-terracotta);">{{ exp.years }}</span>
+            <span class="meta-separator">·</span>
+            <span>{{ exp.location }}</span>
+          </div>
+
+          <h3 style="font-family: var(--font-serif-display); font-size: 1.5rem; color: var(--text-ink); margin-bottom: 0.25rem;">
+            {{ exp.role }}
+          </h3>
+          <div style="font-family: var(--font-sans-ui); font-size: 0.95rem; font-weight: 600; color: var(--accent-bronze); margin-bottom: 1.25rem;">
+            {{ exp.organization }}
+          </div>
+
+          <p style="font-size: 0.95rem; line-height: 1.75; color: var(--text-prose); margin-bottom: 1.25rem;">
+            {{ exp.narrative_description }}
+          </p>
+
+          {% if exp.key_learnings %}
+          <div style="background-color: var(--bg-surface-elevated); padding: 1rem 1.25rem; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-terracotta);">
+            <span style="font-family: var(--font-sans-ui); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-terracotta); display: block; margin-bottom: 0.25rem;">
+              Enduring Takeaway
+            </span>
+            <p style="font-size: 0.875rem; color: var(--text-prose);">
+              {{ exp.key_learnings }}
+            </p>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Acquired Disciplines & Capabilities Grid -->
+    <div>
+      <span class="section-kicker">Synthesized Capabilities</span>
+      <h2 class="editorial-title" style="font-size: 1.85rem; margin-bottom: 2rem;">
+        Disciplines, Craft & Knowledge Sets
+      </h2>
+
+      <div class="archive-grid-2">
+        {% for skill in skills %}
+        <div class="archive-card" style="padding: 1.5rem;">
+          <div class="metadata-line" style="margin-bottom: 0.35rem; font-size: 0.75rem;">
+            <span>{{ skill.category }}</span>
+            <span class="meta-separator">·</span>
+            <span style="font-family: var(--font-mono); color: var(--accent-terracotta);">{{ skill.proficiency_note }}</span>
+          </div>
+          <h4 style="font-family: var(--font-serif-display); font-size: 1.15rem; color: var(--text-ink); margin-bottom: 0.5rem;">
+            {{ skill.name }}
+          </h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+            {{ skill.reflection }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

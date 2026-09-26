@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Achievements & Honors — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <!-- Header -->
+    <header style="max-width: 760px; margin-bottom: 2.5rem;">
+      <span class="section-kicker">Chronicle Part V · Proven Competence</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        Achievements, Honors & Milestones
+      </h1>
+      <p class="editorial-subhead">
+        A verified registry of academic distinctions, competitive honors, professional recognitions, and physical endurance milestones achieved over the years.
+      </p>
+    </header>
+
+    <!-- Category Filters -->
+    <div class="timeline-filter-bar" role="navigation" aria-label="Achievement Categories">
+      {% for cat in categories %}
+      <a 
+        href="{{ url_for('achievements', category=cat if cat != 'All' else None) }}" 
+        class="filter-btn {% if (selected_category == cat) or (selected_category == 'all' and cat == 'All') or (not selected_category and cat == 'All') %}active{% endif %}"
+      >
+        {{ cat }}
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Achievements Grid -->
+    <div class="archive-grid-3">
+      {% if achievements %}
+        {% for item in achievements %}
+        <div class="archive-card">
+          {% if item.image_url %}
+          <div class="archive-card-image">
+            <img src="{{ item.image_url }}" alt="{{ item.title }}" loading="lazy">
+          </div>
+          {% endif %}
+
+          <div class="metadata-line" style="margin-bottom: 0.5rem;">
+            <span style="font-family: var(--font-mono); color: var(--accent-terracotta);">{{ item.year }}</span>
+            <span class="meta-separator">·</span>
+            <span>{{ item.category }}</span>
+            {% if item.issuer %}
+            <span class="meta-separator">·</span>
+            <span style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ item.issuer }}</span>
+            {% endif %}
+          </div>
+
+          <h3 style="font-family: var(--font-serif-display); font-size: 1.2rem; color: var(--text-ink); margin-bottom: 0.75rem;">
+            {{ item.title }}
+          </h3>
+
+          <p style="font-size: 0.9rem; line-height: 1.65; color: var(--text-prose); flex-grow: 1;">
+            {{ item.description }}
+          </p>
+
+          <div style="margin-top: 1.25rem; padding-top: 0.75rem; border-top: 1px solid var(--border-hairline); font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+            <span>Conferred By: {{ item.issuer or 'Archival Council' }}</span>
+            <span class="tabular-nums">#0{{ loop.index }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div style="grid-column: 1 / -1; padding: 4rem; text-align: center; color: var(--text-muted);">
+          No recognitions recorded under this category.
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

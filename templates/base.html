@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ profile.full_name }} — Digital Life Archive{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}A living digital archive and documentary autobiography preserving the lineage, intellectual growth, and personal reflections of {{ profile.full_name }}.{% endblock %}">
+  
+  <!-- Open Graph Metadata -->
+  <meta property="og:title" content="{% block og_title %}{{ profile.full_name }} — Digital Life Archive{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}An authentic personal autobiography and interactive digital book.{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ url_for('static', filename='images/hero_portrait.jpg') }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon / Archival Icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239A3412'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Top Reading Progress Indicator -->
+  <div id="reading-progress-bar" style="position: fixed; top: 0; left: 0; height: 3px; background-color: var(--accent-terracotta); z-index: 999; width: 0%; transition: width 0.1s linear;"></div>
+
+  <!-- Top Bar Contract -->
+  <header class="site-header">
+    <div class="archive-container header-inner">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="{{ url_for('index') }}" class="brand-wordmark" title="Return to Archive Frontispiece">
+        {{ profile.preferred_name or '[ARCHIVE]' }} <span style="font-weight: 400; color: var(--text-muted); font-size: 0.95em;">· Life Archive</span>
+      </a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="desktop-nav" aria-label="Archive Chapters">
+        <a href="{{ url_for('index') }}" class="nav-link {% if active_page == 'home' %}active{% endif %}">Home</a>
+        <a href="{{ url_for('story') }}" class="nav-link {% if active_page == 'story' %}active{% endif %}">My Story</a>
+        <a href="{{ url_for('childhood') }}" class="nav-link {% if active_page == 'childhood' %}active{% endif %}">Childhood</a>
+        <a href="{{ url_for('education') }}" class="nav-link {% if active_page == 'education' %}active{% endif %}">Education</a>
+        <a href="{{ url_for('timeline') }}" class="nav-link {% if active_page == 'timeline' %}active{% endif %}">Timeline</a>
+        <a href="{{ url_for('gallery') }}" class="nav-link {% if active_page == 'gallery' %}active{% endif %}">Gallery</a>
+
+        <!-- Curated Chapters Dropdown -->
+        <div class="nav-dropdown" style="position: relative;">
+          <span class="nav-link nav-dropdown-trigger">
+            Chapters
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+          <div class="nav-dropdown-menu">
+            <a href="{{ url_for('family') }}" class="dropdown-item">Family & Lineage</a>
+            <a href="{{ url_for('memories') }}" class="dropdown-item">Memories & Reflections</a>
+            <a href="{{ url_for('achievements') }}" class="dropdown-item">Achievements & Honors</a>
+            <a href="{{ url_for('professional') }}" class="dropdown-item">Professional Journey</a>
+            <a href="{{ url_for('growth') }}" class="dropdown-item">Personal Growth</a>
+            <a href="{{ url_for('future') }}" class="dropdown-item">Future Goals</a>
+            <a href="{{ url_for('contact') }}" class="dropdown-item">Contact & Messages</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Zone 3: Header Controls -->
+      <div class="header-actions">
+        <!-- Ambient Audio Tone Toggle -->
+        <button id="ambient-audio-toggle" class="action-btn-subtle" title="Toggle quiet room tone for focused reading" aria-label="Toggle ambient audio">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <span class="audio-btn-text" style="display: none;" class="md:inline">Ambiance</span>
+        </button>
+
+        <!-- Theme Mode Toggle -->
+        <button id="theme-toggle-btn" class="action-btn-subtle" title="Switch between Parchment and Reading Room modes" aria-label="Toggle theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <span class="theme-btn-text">Reading Room</span>
+        </button>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-open" class="hamburger-btn" aria-label="Open Archive Navigation">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Navigation -->
+  <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
+  <aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <span style="font-family: var(--font-serif-display); font-weight: 700; color: var(--text-ink); font-size: 1.1rem;">Archive Folio</span>
+      <button id="mobile-menu-close" class="lightbox-btn" style="color: var(--text-ink); padding: 0.25rem;" aria-label="Close navigation">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="mobile-nav-links">
+      <a href="{{ url_for('index') }}" class="mobile-nav-link {% if active_page == 'home' %}active{% endif %}">
+        <span>00. Frontispiece & Overview</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('story') }}" class="mobile-nav-link {% if active_page == 'story' %}active{% endif %}">
+        <span>01. My Story</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('childhood') }}" class="mobile-nav-link {% if active_page == 'childhood' %}active{% endif %}">
+        <span>02. Childhood & Origins</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('family') }}" class="mobile-nav-link {% if active_page == 'family' %}active{% endif %}">
+        <span>03. Family & Lineage</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('education') }}" class="mobile-nav-link {% if active_page == 'education' %}active{% endif %}">
+        <span>04. Education Journey</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('timeline') }}" class="mobile-nav-link {% if active_page == 'timeline' %}active{% endif %}">
+        <span>05. Life Timeline</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('gallery') }}" class="mobile-nav-link {% if active_page == 'gallery' %}active{% endif %}">
+        <span>06. Photo Archive</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('memories') }}" class="mobile-nav-link {% if active_page == 'memories' %}active{% endif %}">
+        <span>07. Memories & Reflections</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('achievements') }}" class="mobile-nav-link {% if active_page == 'achievements' %}active{% endif %}">
+        <span>08. Achievements</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('professional') }}" class="mobile-nav-link {% if active_page == 'professional' %}active{% endif %}">
+        <span>09. Professional Journey</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('growth') }}" class="mobile-nav-link {% if active_page == 'growth' %}active{% endif %}">
+        <span>10. Personal Growth</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('future') }}" class="mobile-nav-link {% if active_page == 'future' %}active{% endif %}">
+        <span>11. Future Goals</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+      <a href="{{ url_for('contact') }}" class="mobile-nav-link {% if active_page == 'contact' %}active{% endif %}">
+        <span>12. Contact & Letters</span>
+        <span style="color: var(--text-muted);">&rarr;</span>
+      </a>
+    </div>
+
+    <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+      <p style="font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--text-muted);">
+        Volume I · Digital Life Archive<br>
+        Curated for posterity.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main id="main-content" style="flex: 1 0 auto;">
+    <!-- Flash Messages Container -->
+    <div class="archive-container" style="padding-top: 1rem;">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash-alert {{ category }}" role="alert">
+              <span>{{ message }}</span>
+              <button class="alert-close lightbox-btn" style="color: inherit; padding: 0.25rem;" aria-label="Dismiss alert">&times;</button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Universal Lightbox Modal Structure -->
+  <div id="gallery-lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo View">
+    <div class="lightbox-container">
+      <button class="lightbox-btn lightbox-close" aria-label="Close photo view">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+
+      <button class="lightbox-btn lightbox-prev" aria-label="Previous photo">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+
+      <div class="lightbox-image-wrap">
+        <img src="" alt="" class="lightbox-image">
+      </div>
+
+      <button class="lightbox-btn lightbox-next" aria-label="Next photo">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      <div class="lightbox-caption-bar">
+        <h4 class="lightbox-title"></h4>
+        <p class="lightbox-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Curatorial Colophon Footer -->
+  <footer class="site-footer">
+    <div class="archive-container">
+      <div class="footer-grid">
+        <!-- Col 1: Colophon & Heritage Note -->
+        <div>
+          <span class="footer-col-title">About This Life Archive</span>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; max-width: 440px;">
+            A personal digital memoir structured as an interactive autobiography. 
+            All sections and models are engineered on Python Flask with SQLite and PostgreSQL readiness, 
+            designed to endure as an authentic family record for generations.
+          </p>
+          <div class="metadata-line">
+            <span>Custodian: {{ profile.full_name }}</span>
+            <span class="meta-separator">/</span>
+            <span>Origin: {{ profile.birth_place }}</span>
+            <span class="meta-separator">/</span>
+            <span>Version: 1.0.0</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Core Chapters -->
+        <div>
+          <span class="footer-col-title">Primary Chapters</span>
+          <ul class="footer-nav-list">
+            <li><a href="{{ url_for('story') }}" class="footer-nav-link">My Story (Long-form Biography)</a></li>
+            <li><a href="{{ url_for('childhood') }}" class="footer-nav-link">Childhood & Origins</a></li>
+            <li><a href="{{ url_for('family') }}" class="footer-nav-link">Family & Lineage</a></li>
+            <li><a href="{{ url_for('education') }}" class="footer-nav-link">Education Journey</a></li>
+            <li><a href="{{ url_for('timeline') }}" class="footer-nav-link">Complete Life Timeline</a></li>
+            <li><a href="{{ url_for('gallery') }}" class="footer-nav-link">Photo Archive & Albums</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Philosophical & Future -->
+        <div>
+          <span class="footer-col-title">Reflections & Inquiries</span>
+          <ul class="footer-nav-list">
+            <li><a href="{{ url_for('memories') }}" class="footer-nav-link">Memories & Personal Stories</a></li>
+            <li><a href="{{ url_for('achievements') }}" class="footer-nav-link">Achievements & Milestones</a></li>
+            <li><a href="{{ url_for('professional') }}" class="footer-nav-link">Professional Craft</a></li>
+            <li><a href="{{ url_for('growth') }}" class="footer-nav-link">Personal Growth (Who I Was/Am)</a></li>
+            <li><a href="{{ url_for('future') }}" class="footer-nav-link">Future Vision & Goals</a></li>
+            <li><a href="{{ url_for('contact') }}" class="footer-nav-link">Send Transmission / Message</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; {{ current_year }} {{ profile.full_name }}. Preserved for posterity. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 1.25rem;">
+          <a href="{{ url_for('health') }}" class="footer-nav-link" style="color: var(--text-faint);" target="_blank">Health & Engine Status</a>
+          <a href="{{ url_for('robots') }}" class="footer-nav-link" style="color: var(--text-faint);" target="_blank">Robots.txt</a>
+          <a href="{{ url_for('sitemap') }}" class="footer-nav-link" style="color: var(--text-faint);" target="_blank">Sitemap.xml</a>
+          <a href="#main-content" class="footer-nav-link" style="color: var(--accent-terracotta);">Return to Top &uarr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Engine -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

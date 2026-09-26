@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Personal Growth — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container archive-container-narrow">
+    <!-- Header -->
+    <header style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chronicle Part VII · The Inward Evolution</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        Personal Growth & Metamorphosis
+      </h1>
+      <p class="editorial-subhead">
+        A philosophical mirror reflecting on youth, illusions dismantled by experience, intellectual transformation, and the conscious stewardship of character.
+      </p>
+      <hr class="hairline-divider">
+    </header>
+
+    <!-- Visual Landscape Anchor -->
+    <div style="margin-bottom: 3.5rem; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle);">
+      <img src="{{ url_for('static', filename='images/growth_landscape.jpg') }}" alt="Alpine Ridge Horizon at Dawn" style="width: 100%; height: auto; max-height: 380px; object-fit: cover; display: block;" loading="eager">
+      <div style="padding: 0.75rem 1rem; background-color: var(--bg-surface); font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <span>Figure 4.1 — Solitude on the highland ridge: The landscape of inward renewal.</span>
+        <span>Elevation 2,400m</span>
+      </div>
+    </div>
+
+    <!-- The 5 Inward Pillars -->
+    <div style="display: flex; flex-direction: column; gap: 3rem;">
+      <!-- 01. Who I Was -->
+      <article class="archive-card" style="padding: 2.25rem;">
+        <span class="section-kicker">Reflection 01</span>
+        <h2 class="editorial-title" style="font-size: 1.5rem; color: var(--text-ink); margin-bottom: 1rem;">
+          Who I Was: The Impetuous Dreamer
+        </h2>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--text-prose); margin-bottom: 1rem;">
+          [WHO I WAS: In early youth, I believed that knowledge was synonymous with speed and accumulation. I was impatient with ambiguity and hungry for validation. Every debate felt like a territory to conquer, and failure felt like an existential indictment rather than a generous instructor.]
+        </p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
+          Beneath that early intensity lay a quiet fear that one might remain unseen or that humble village beginnings were something to outrun rather than cherish.
+        </p>
+      </article>
+
+      <!-- 02. Who I Am -->
+      <article class="archive-card" style="padding: 2.25rem;">
+        <span class="section-kicker">Reflection 02</span>
+        <h2 class="editorial-title" style="font-size: 1.5rem; color: var(--text-ink); margin-bottom: 1rem;">
+          Who I Am: The Mindful Custodian
+        </h2>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--text-prose); margin-bottom: 1rem;">
+          [WHO I AM: Today, I inhabit a much quieter sanctuary. I cherish unhurried mornings, deep conversations with family, and the satisfaction of building enduring things. I have made peace with my limits, while continuing to stretch them with steady daily labor.]
+        </p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
+          I judge myself not by the applause of strangers on the internet, but by the steadiness with which I keep faith with those who love me.
+        </p>
+      </article>
+
+      <!-- 03. What I Learned -->
+      <article class="archive-card" style="padding: 2.25rem;">
+        <span class="section-kicker">Reflection 03</span>
+        <h2 class="editorial-title" style="font-size: 1.5rem; color: var(--text-ink); margin-bottom: 1rem;">
+          What I Learned: Hard-Won Realities
+        </h2>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.95rem; line-height: 1.75;">
+          <li style="border-bottom: 1px solid var(--border-hairline); padding-bottom: 0.75rem;">
+            <strong>[ON COMPLEXITY]:</strong> Any intelligent fool can make things bigger and more complex. It takes true courage and a touch of genius to move in the opposite direction.
+          </li>
+          <li style="border-bottom: 1px solid var(--border-hairline); padding-bottom: 0.75rem;">
+            <strong>[ON TIME]:</strong> You do not lack time; you lack clarity of elimination. Saying 'no' to good opportunities is the only prerequisite to saying 'yes' to monumental ones.
+          </li>
+          <li>
+            <strong>[ON RELATIONSHIPS]:</strong> The richness of old age is directly proportional to how many old friends you have not betrayed.
+          </li>
+        </ul>
+      </article>
+
+      <!-- 04. How I Changed -->
+      <article class="archive-card" style="padding: 2.25rem;">
+        <span class="section-kicker">Reflection 04</span>
+        <h2 class="editorial-title" style="font-size: 1.5rem; color: var(--text-ink); margin-bottom: 1rem;">
+          How I Changed: The Softening of Pride
+        </h2>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--text-prose); margin-bottom: 1rem;">
+          [HOW I CHANGED: The sharp edges of youthful dogmatism were rounded by the abrasive friction of actual experience. I learned to apologize without caveat. I learned that listening to someone with whom you disagree is not surrender; it is the elementary etiquette of civilization.]
+        </p>
+      </article>
+
+      <!-- 05. Where I Am Going -->
+      <article class="archive-card" style="padding: 2.25rem;">
+        <span class="section-kicker">Reflection 05</span>
+        <h2 class="editorial-title" style="font-size: 1.5rem; color: var(--text-ink); margin-bottom: 1rem;">
+          Where I Am Going: Toward the Horizon
+        </h2>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--text-prose); margin-bottom: 1.5rem;">
+          [WHERE I AM GOING: Forward into the next decade with open eyes and unclenched hands. Building institutions that will outlive me, mentoring young minds who will surpass me, and preserving the oral histories of the village that gave me my first breath.]
+        </p>
+        <div>
+          <a href="{{ url_for('future') }}" class="btn-primary">
+            <span>Inspect Future Goals & Visions</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

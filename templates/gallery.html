@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Photo Archive & Gallery — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <!-- Header -->
+    <header style="max-width: 760px; margin-bottom: 2.5rem;">
+      <span class="section-kicker">Visual Corpus</span>
+      <h1 class="editorial-title" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+        Photographic Plates & Visual Archive
+      </h1>
+      <p class="editorial-subhead">
+        A preserved gallery of places, companions, family gatherings, work stations, and quiet landscapes captured across the journey. Click any plate to open the full-screen exhibition viewer.
+      </p>
+    </header>
+
+    <!-- Category Filter Bar -->
+    <div class="timeline-filter-bar" role="navigation" aria-label="Gallery Categories">
+      {% for cat in categories %}
+      <a 
+        href="{{ url_for('gallery', category=cat if cat != 'All' else None) }}" 
+        class="filter-btn {% if (selected_category == cat) or (selected_category == 'all' and cat == 'All') or (not selected_category and cat == 'All') %}active{% endif %}"
+      >
+        {{ cat }}
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      {% if images %}
+        {% for img in images %}
+        <div 
+          class="gallery-item"
+          data-full-src="{{ img.image_url }}"
+          data-title="{{ img.title }}"
+          data-caption="{{ img.caption }}"
+          role="button"
+          tabindex="0"
+          aria-label="View photo {{ img.title }}"
+        >
+          <div class="gallery-thumbnail-wrap">
+            <img 
+              src="{{ img.image_url }}" 
+              alt="{{ img.title }}" 
+              class="gallery-thumbnail"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            >
+          </div>
+          <div class="gallery-meta">
+            <div class="metadata-line" style="margin-bottom: 0.25rem; font-size: 0.7rem;">
+              <span>{{ img.category }}</span>
+              {% if img.year %}
+              <span class="meta-separator">·</span>
+              <span class="tabular-nums">{{ img.year }}</span>
+              {% endif %}
+            </div>
+            <h3 class="gallery-title">{{ img.title }}</h3>
+            <p class="gallery-caption">{{ img.caption }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div style="grid-column: 1 / -1; padding: 4rem; text-align: center; color: var(--text-muted);">
+          No photographs cataloged in this classification.
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Curator's Note on Archival Preservation -->
+    <div style="margin-top: 4rem; padding: 2rem; background-color: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+      <h4 style="font-family: var(--font-serif-display); font-size: 1.1rem; color: var(--text-ink); margin-bottom: 0.5rem;">
+        Preservation Protocol & Image Standards
+      </h4>
+      <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+        All plates in this archive are stored in uncompressed archival formats (WebP/JPEG) alongside contextual metadata, date ranges, and field notes. When replacing placeholder plates with real client photography, uploads are sanitized and optimized automatically.
+      </p>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

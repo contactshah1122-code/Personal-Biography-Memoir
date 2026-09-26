@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found (404) — {{ profile.full_name }}'s Digital Life Archive{% endblock %}
+
+{% block content %}
+<section style="padding: 6rem 0 8rem 0; text-align: center;">
+  <div class="archive-container archive-container-narrow">
+    <span class="section-kicker">Archival Absence</span>
+    <h1 class="editorial-title" style="font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 1rem;">
+      Folio Missing (404)
+    </h1>
+    <p class="editorial-subhead" style="margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto;">
+      The parchment or chapter you requested has either dissolved into memory or was cataloged under an alternative reference.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('index') }}" class="btn-primary">
+        <span>Return to Frontispiece</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <a href="{{ url_for('timeline') }}" class="btn-secondary">
+        <span>Consult Life Timeline</span>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

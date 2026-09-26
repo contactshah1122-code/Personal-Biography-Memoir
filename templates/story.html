@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}My Story — The Complete Autobiography of {{ profile.full_name }}{% endblock %}
+
+{% block content %}
+<article style="padding: 4rem 0;">
+  <div class="archive-container archive-container-narrow">
+    <!-- Header Block -->
+    <header style="margin-bottom: 3.5rem; text-align: left;">
+      <span class="section-kicker">Autobiographical Monograph</span>
+      <h1 class="editorial-title" style="font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin-bottom: 1rem;">
+        The Shape of Days: A Personal Chronicle
+      </h1>
+      <p class="editorial-subhead" style="margin-bottom: 1.5rem;">
+        From rural village silence and early chalkboard slates to high-order computational systems and enduring creative craft.
+      </p>
+      <div class="metadata-line">
+        <span>Written by {{ profile.full_name }}</span>
+        <span class="meta-separator">/</span>
+        <span>Estimated Reading Time: 12 Minutes</span>
+        <span class="meta-separator">/</span>
+        <span>Documentary Edition 2026</span>
+      </div>
+      <hr class="hairline-divider">
+    </header>
+
+    <!-- Side Anchor Chapter Quick Rail -->
+    <div style="background-color: var(--bg-surface-elevated); padding: 1.25rem 1.5rem; border-radius: var(--radius-sm); margin-bottom: 3rem; border: 1px solid var(--border-subtle);">
+      <span style="font-family: var(--font-sans-ui); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-ink); display: block; margin-bottom: 0.75rem;">
+        Chapters in This Monograph
+      </span>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-family: var(--font-sans-ui); font-size: 0.8125rem;">
+        <a href="#began" class="footer-nav-link">01. Where My Story Began</a>
+        <a href="#childhood" class="footer-nav-link">02. Childhood</a>
+        <a href="#family" class="footer-nav-link">03. Family Environment</a>
+        <a href="#dreams" class="footer-nav-link">04. Early Dreams</a>
+        <a href="#education" class="footer-nav-link">05. Education</a>
+        <a href="#difficulties" class="footer-nav-link">06. Difficult Moments</a>
+        <a href="#decisions" class="footer-nav-link">07. Important Decisions</a>
+        <a href="#growth" class="footer-nav-link">08. Personal Growth</a>
+        <a href="#current" class="footer-nav-link">09. Current Chapter</a>
+        <a href="#future" class="footer-nav-link">10. Future Vision</a>
+      </div>
+    </div>
+
+    <!-- Chapter 1: Where My Story Began -->
+    <section id="began" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 01</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">Where My Story Began</h2>
+      <p class="drop-cap" style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [WHERE MY STORY BEGAN: Every human consciousness awakens in a geography it did not choose. Mine began in {{ profile.birth_place }}, where stone pathways wound between family courtyards and the seasons dictated the rhythm of every breath. Before the arrival of constant digital screens and rapid urban transit, existence had a palpable weight: the chill of morning well-water, the smell of damp lime on stone walls, and the distant chiming of temple bells echoing across the riverbanks. It was here that my earliest perceptions of time, patience, and belonging took root.]
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.85; color: var(--text-prose);">
+        [ORIGINS CONTEXT: In this village landscape, memory was not stored on silicone chips; it was preserved in the spoken word. The elders spoke with cadence and unhurried pause. To grow up in such an environment meant learning how to listen before presuming to speak—a discipline that would quietly govern every intellectual pursuit that followed in later decades.]
+      </p>
+    </section>
+
+    <!-- Chapter 2: Childhood -->
+    <section id="childhood" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 02</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">Childhood & the Open Horizon</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [CHILDHOOD STORY: Childhood was punctuated by dirt roads, improvised toys fashioned from bicycle spokes and timber scraps, and endless afternoon wanderings through adjacent groves. We did not measure wealth by possessions, but by the freedom to run until our chests burned and the dinner call echoed through the dusk.]
+      </p>
+      <div style="margin: 2rem 0; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden;">
+        <img src="{{ url_for('static', filename='images/village_home.jpg') }}" alt="Nostalgic Village Home" style="width: 100%; height: auto; display: block;" loading="lazy">
+        <div style="padding: 0.75rem 1rem; background-color: var(--bg-surface); font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--text-muted);">
+          Figure 1.1 — The ancestral village homestead and surrounding pathways where early curiosity was forged.
+        </div>
+      </div>
+      <p style="font-size: 1.05rem; line-height: 1.85;">
+        [LESSONS LEARNED: Those years ingrained a fundamental reverence for raw materials. When you construct something with your hands—whether a small irrigation channel or a wooden kite—you quickly learn that reality does not yield to vanity or wishful thinking; it only answers to structural truth.]
+      </p>
+    </section>
+
+    <!-- Chapter 3: Family Environment -->
+    <section id="family" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 03</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">The Familial Hearth</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [FAMILY ENVIRONMENT: If childhood provided the scenery, family provided the moral compass. Our household was centered around values of quiet perseverance, unyielding honesty, and deep hospitality. My father demonstrated that daily manual work possesses its own dignified poetry, while my mother ensured that despite any financial lean seasons, books and education were treated as non-negotiable holy artifacts.]
+      </p>
+      <blockquote class="editorial-quote">
+        “A home is not fortified by the thickness of its doors, but by the quiet generosity of the hands that open them.”
+        <span class="quote-author">— Family Principle</span>
+      </blockquote>
+    </section>
+
+    <!-- Chapter 4: Early Dreams -->
+    <section id="dreams" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 04</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">Early Dreams & the Discovery of Books</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [EARLY DREAMS: At age ten, I discovered an old translation of world encyclopedias in a corner shelf of the town library. For the first time, maps opened up: the Andes, the canals of Venice, the orbits of planetary satellites, and the lives of inventors who altered the course of human capability. I realized that beyond the perimeter of our hills lay an enormous conversation of human civilization, and I desperately wanted to participate in it.]
+      </p>
+    </section>
+
+    <!-- Chapter 5: Education -->
+    <section id="education" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 05</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">The Crucible of Education</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [REAL EDUCATION DETAILS: Formal schooling was an arena of intense intellectual awakening. Moving through primary grades with chalkboard slates to high school laboratories, and ultimately competing for entry into university lecture halls. Mathematics and systemic logic provided an exhilarating clarity: problems had exact boundaries, and every complexity could be broken down into elegant primitives.]
+      </p>
+      <div style="margin: 2rem 0; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden;">
+        <img src="{{ url_for('static', filename='images/study_desk.jpg') }}" alt="Vintage Study Desk" style="width: 100%; height: auto; display: block;" loading="lazy">
+        <div style="padding: 0.75rem 1rem; background-color: var(--bg-surface); font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--text-muted);">
+          Figure 1.2 — The study desk: thousands of hours dedicated to reading, calculation, and rigorous analysis.
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 6: Difficult Moments -->
+    <section id="difficulties" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 06</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">Trials, Solitude & Overcoming Doubt</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [DIFFICULT MOMENTS: No autobiography is authentic without acknowledging the dark valleys. Leaving home for university brought acute dislocation: cultural culture-shock in the metropolis, periods of profound loneliness, and seasons where financial constraints created intense anxiety. There were moments when impostor syndrome whispered that a boy from a tranquil village could never hold his own amidst students with vastly greater privileges.]
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.85;">
+        [TURNING POINT: In those solitary hours, what sustained me was remembering the sacrifices my parents made. Hardship ceased to be an obstacle and became a furnace that burned away entitlement, leaving behind resilient grit.]
+      </p>
+    </section>
+
+    <!-- Chapter 7: Important Decisions -->
+    <section id="decisions" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 07</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">Decisions at the Crossroads</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [IMPORTANT DECISIONS: Life is governed by three or four pivotal forks in the road. Choosing to pursue deep systems engineering over more superficial commercial shortcuts; choosing to relocate to unfamiliar territory to learn under masterful mentors; and choosing to dedicate discretionary hours to writing and heritage preservation rather than mindless entertainment.]
+      </p>
+    </section>
+
+    <!-- Chapter 8: Personal Growth -->
+    <section id="growth" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 08</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">The Architecture of Personal Growth</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [PERSONAL GROWTH: Over the years, the measure of success shifted profoundly. In my early twenties, success looked like external acclaim, titles, and velocity. In maturity, success looks like calmness of mind, depth of intimate relationships, intellectual honesty, and the ability to mentor younger individuals without ego.]
+      </p>
+    </section>
+
+    <!-- Chapter 9: Current Chapter -->
+    <section id="current" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 09</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">The Present: Synthesis & Stewardship</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [CURRENT CHAPTER: Today, in {{ profile.current_chapter }}, my life stands at the intersection of execution and reflection. I build software architectures that solve complex infrastructural challenges, while simultaneously writing this life archive so that what was learned along the journey is not lost to the currents of forgetfulness.]
+      </p>
+    </section>
+
+    <!-- Chapter 10: Future Vision -->
+    <section id="future" style="margin-bottom: 3.5rem;">
+      <span class="section-kicker">Chapter 10</span>
+      <h2 class="editorial-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">Looking Toward the Horizon</h2>
+      <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem;">
+        [FUTURE VISION: The upcoming chapters are not about personal aggrandizement, but about enduring contribution. Supporting talented young students from rural origins, authoring lasting texts, stewarding ecological land, and cultivating a peaceful home filled with laughter and books.]
+      </p>
+      <div style="margin-top: 3rem; text-align: center;">
+        <a href="{{ url_for('timeline') }}" class="btn-primary">
+          <span>Continue Reading into the Timeline</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}{{ profile.full_name }} — Personal Digital Life Archive{% endblock %}
+
+{% block content %}
+<!-- Frontispiece / Hero Section -->
+<section class="hero-section">
+  <div class="archive-container">
+    <div class="hero-grid">
+      <!-- Left Column: Biography & Identity -->
+      <div>
+        <span class="section-kicker">Volume I · Personal Autobiography</span>
+        <h1 class="editorial-title" style="font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 1.25rem;">
+          {{ profile.full_name }}
+        </h1>
+
+        <p class="editorial-subhead" style="margin-bottom: 1.5rem; max-width: 600px;">
+          {{ profile.tagline }}
+        </p>
+
+        <!-- Unboxed Metadata Line (Zero-Pill Discipline) -->
+        <div class="metadata-line" style="margin-bottom: 1.75rem;">
+          <span>Age: {{ profile.current_age }}</span>
+          <span class="meta-separator">·</span>
+          <span>Origins: {{ profile.birth_place }}</span>
+          <span class="meta-separator">·</span>
+          <span>Residence: {{ profile.current_residence }}</span>
+        </div>
+
+        <!-- Curatorial Quote -->
+        <blockquote class="editorial-quote" style="margin: 1.75rem 0; font-size: 1.15rem;">
+          {{ profile.hero_quote }}
+          <span class="quote-author">— Custodian's Inscription</span>
+        </blockquote>
+
+        <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; max-width: 580px;">
+          {{ profile.short_bio }}
+        </p>
+
+        <!-- Primary Actions -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="{{ url_for('story') }}" class="btn-primary">
+            <span>Begin My Story</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="{{ url_for('timeline') }}" class="btn-secondary">
+            <span>Explore Timeline</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Archival Portrait Frame -->
+      <div>
+        <div class="hero-portrait-frame">
+          <img 
+            src="{{ profile.profile_photo }}" 
+            alt="Archival Portrait of {{ profile.full_name }}" 
+            class="hero-portrait-img"
+            loading="eager"
+            referrerpolicy="no-referrer"
+          >
+          <div class="hero-portrait-caption">
+            <strong>{{ profile.full_name }}</strong> · [REAL PROFILE PHOTO]
+            <div style="font-size: 0.7rem; opacity: 0.85;">Current Chapter: {{ profile.current_chapter }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter Progress Visual Indicator (Subtle Editorial Horizon) -->
+    <div class="chapter-milestones">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-family: var(--font-sans-ui); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">
+          Sequential Life Horizons
+        </span>
+        <span style="font-family: var(--font-sans-ui); font-size: 0.75rem; color: var(--accent-terracotta);">
+          {{ profile.current_chapter }}
+        </span>
+      </div>
+
+      <div class="chapter-milestone-track">
+        <a href="{{ url_for('childhood') }}" class="milestone-step">
+          <div class="milestone-node"></div>
+          <span class="milestone-label">I. Childhood</span>
+        </a>
+        <div style="flex: 1; height: 1px; background-color: var(--border-subtle); margin: 0 0.5rem; margin-bottom: 1rem;"></div>
+
+        <a href="{{ url_for('education') }}" class="milestone-step">
+          <div class="milestone-node"></div>
+          <span class="milestone-label">II. Education</span>
+        </a>
+        <div style="flex: 1; height: 1px; background-color: var(--border-subtle); margin: 0 0.5rem; margin-bottom: 1rem;"></div>
+
+        <a href="{{ url_for('timeline') }}?category=Challenge" class="milestone-step">
+          <div class="milestone-node"></div>
+          <span class="milestone-label">III. Challenges</span>
+        </a>
+        <div style="flex: 1; height: 1px; background-color: var(--border-subtle); margin: 0 0.5rem; margin-bottom: 1rem;"></div>
+
+        <a href="{{ url_for('growth') }}" class="milestone-step">
+          <div class="milestone-node"></div>
+          <span class="milestone-label">IV. Growth</span>
+        </a>
+        <div style="flex: 1; height: 1px; background-color: var(--border-subtle); margin: 0 0.5rem; margin-bottom: 1rem;"></div>
+
+        <a href="{{ url_for('professional') }}" class="milestone-step active">
+          <div class="milestone-node"></div>
+          <span class="milestone-label">V. Present</span>
+        </a>
+        <div style="flex: 1; height: 1px; background-color: var(--border-subtle); margin: 0 0.5rem; margin-bottom: 1rem;"></div>
+
+        <a href="{{ url_for('future') }}" class="milestone-step">
+          <div class="milestone-node"></div>
+          <span class="milestone-label">VI. Future</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Milestones of the Chronicle -->
+<section style="padding: 4rem 0; border-bottom: 1px solid var(--border-subtle);">
+  <div class="archive-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="section-kicker">Chronological Anchors</span>
+        <h2 class="editorial-title" style="font-size: 2rem;">Defining Thresholds</h2>
+      </div>
+      <a href="{{ url_for('timeline') }}" class="btn-secondary" style="font-size: 0.8125rem; padding: 0.5rem 1rem;">
+        View Complete Timeline &rarr;
+      </a>
+    </div>
+
+    <div class="archive-grid-3">
+      {% for event in featured_events %}
+      <div class="archive-card">
+        {% if event.photo_url %}
+        <div class="archive-card-image">
+          <img src="{{ event.photo_url }}" alt="{{ event.title }}" loading="lazy" referrerpolicy="no-referrer">
+        </div>
+        {% endif %}
+        <div class="metadata-line" style="margin-bottom: 0.5rem;">
+          <span style="font-family: var(--font-mono); color: var(--accent-terracotta);">{{ event.year_date }}</span>
+          <span class="meta-separator">·</span>
+          <span>{{ event.category }}</span>
+          {% if event.location %}
+          <span class="meta-separator">·</span>
+          <span>{{ event.location }}</span>
+          {% endif %}
+        </div>
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--text-ink);">
+          {{ event.title }}
+        </h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; flex-grow: 1;">
+          {{ event.description }}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Personal Memoir Stories Excerpt -->
+<section style="padding: 4rem 0; border-bottom: 1px solid var(--border-subtle); background-color: var(--bg-surface-elevated);">
+  <div class="archive-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="section-kicker">Sensory Reflections</span>
+        <h2 class="editorial-title" style="font-size: 2rem;">Memories in Ink</h2>
+      </div>
+      <a href="{{ url_for('memories') }}" class="btn-secondary" style="font-size: 0.8125rem; padding: 0.5rem 1rem;">
+        Read All Memoirs &rarr;
+      </a>
+    </div>
+
+    <div class="archive-grid-2">
+      {% for mem in recent_memories %}
+      <div class="archive-card" style="background-color: var(--bg-surface);">
+        <div class="metadata-line" style="margin-bottom: 0.75rem;">
+          <span>{{ mem.date_str }}</span>
+          <span class="meta-separator">·</span>
+          <span>{{ mem.location }}</span>
+        </div>
+        <h3 style="font-family: var(--font-serif-display); font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-ink);">
+          {{ mem.title }}
+        </h3>
+        <p style="font-size: 0.9375rem; line-height: 1.7; color: var(--text-prose); margin-bottom: 1.25rem;">
+          {{ mem.story }}
+        </p>
+        {% if mem.quote %}
+        <blockquote style="font-style: italic; font-size: 0.9rem; color: var(--accent-terracotta); border-left: 2px solid var(--accent-terracotta); padding-left: 1rem; margin-top: auto;">
+          {{ mem.quote }}
+        </blockquote>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Visual Archives Preview -->
+<section style="padding: 4rem 0;">
+  <div class="archive-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="section-kicker">Photographic Plate Vault</span>
+        <h2 class="editorial-title" style="font-size: 2rem;">Visual Fragments</h2>
+      </div>
+      <a href="{{ url_for('gallery') }}" class="btn-secondary" style="font-size: 0.8125rem; padding: 0.5rem 1rem;">
+        Open Full Gallery &rarr;
+      </a>
+    </div>
+
+    <div class="gallery-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+      {% for img in gallery_preview %}
+      <div 
+        class="gallery-item"
+        data-full-src="{{ img.image_url }}"
+        data-title="{{ img.title }}"
+        data-caption="{{ img.caption }}"
+      >
+        <div class="gallery-thumbnail-wrap">
+          <img src="{{ img.image_url }}" alt="{{ img.title }}" class="gallery-thumbnail" loading="lazy" referrerpolicy="no-referrer">
+        </div>
+        <div class="gallery-meta">
+          <div class="metadata-line" style="margin-bottom: 0.25rem; font-size: 0.7rem;">
+            <span>{{ img.category }}</span>
+            <span class="meta-separator">·</span>
+            <span>{{ img.year }}</span>
+          </div>
+          <h4 class="gallery-title" style="font-size: 0.95rem;">{{ img.title }}</h4>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
