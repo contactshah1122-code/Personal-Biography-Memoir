@@ -73,6 +73,9 @@ export default function App() {
   // Health Modal State
   const [showHealthModal, setShowHealthModal] = useState(false);
 
+  // ZIP Export Modal State
+  const [showExportModal, setShowExportModal] = useState(false);
+
   // Web Audio Context Reference
   const audioCtxRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
@@ -390,6 +393,22 @@ export default function App() {
 
           {/* Zone 3: Controls */}
           <div className="header-actions">
+            {/* Download ZIP Package */}
+            <button
+              onClick={() => setShowExportModal(true)}
+              className="action-btn-subtle"
+              title="Download entire website as a ZIP file"
+              aria-label="Download ZIP file"
+              style={{ borderColor: 'var(--accent-terracotta)', color: 'var(--accent-terracotta)', fontWeight: 600 }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" x2="12" y1="15" y2="3" />
+              </svg>
+              <span>Download ZIP</span>
+            </button>
+
             {/* Ambient Audio Tone */}
             <button
               onClick={toggleAmbientAudio}
@@ -491,6 +510,20 @@ export default function App() {
               <span style={{ color: 'var(--text-muted)' }}>&rarr;</span>
             </button>
           ))}
+          <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+            <button
+              onClick={() => { setMobileMenuOpen(false); setShowExportModal(true); }}
+              className="btn-primary"
+              style={{ width: '100%', justifyContent: 'center', fontSize: '0.875rem' }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" x2="12" y1="15" y2="3" />
+              </svg>
+              <span>Download Archive (.ZIP)</span>
+            </button>
+          </div>
         </div>
       </aside>
 
